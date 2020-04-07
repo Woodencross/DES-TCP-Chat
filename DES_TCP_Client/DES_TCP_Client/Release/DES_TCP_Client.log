@@ -1,0 +1,8 @@
+﻿  des.cpp
+des.cpp(337): warning C4244: “+=”: 从“double”转换到“int”，可能丢失数据
+  main.cpp
+  正在生成代码
+  All 301 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  已完成代码的生成
+  DES_TCP_Client.vcxproj -> C:\Users\Qichong49\Documents\Visual Studio 2015\Projects\DES_TCP_Client\Release\DES_TCP_Client.exe
+  DES_TCP_Client.vcxproj -> C:\Users\Qichong49\Documents\Visual Studio 2015\Projects\DES_TCP_Client\Release\DES_TCP_Client.pdb (Full PDB)

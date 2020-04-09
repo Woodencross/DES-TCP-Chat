@@ -18,6 +18,8 @@ https://github.com/Woodencross/DES-TCP-Chat.git
   
   - 先运行Server再运行Client自动连接，Client退出可重连，Server退出不可重连，没有做quit命令，退出直接右上角:x:
   
+  - DES解密直接用加密流程就行，只不过在16轮迭代的时候把子密钥倒过来从15用到0
+  
   - socket的inet_addr()和inet_ntoa()应该是过时了现在会报错，用inet_pton()和inet_ntop()
   
   - thread类在C++ 11及以上，还挺方便的...

@@ -2,15 +2,16 @@
 
 基于DES加密的TCP命令行多线程通信
 
+https://github.com/Woodencross/DES-TCP-Chat.git
+
 > 环境Windows, VS2015
 
-- 先运行Server再运行Client自动连接，Client退出可重连，Server退出不可重连，没有做quit命令，退出直接右上角:x:
-
-- socket的inet_addr()和inet_ntoa()应该是过时了现在会报错，用inet_pton()和inet_ntop()
-
-- thread类在C++ 11及以上，还挺方便的...
-
-- 有两个bind()，好像是命名空间问题，返回int的bind()需要写成::bind()，在server的main()里
+- Tips：
+  - 先运行Server再运行Client自动连接，Client退出可重连，Server退出不可重连，没有做quit命令，退出直接右上角:x:
+  - socket的inet_addr()和inet_ntoa()应该是过时了现在会报错，用inet_pton()和inet_ntop()
+  - thread类在C++ 11及以上，还挺方便的...
+  - 有两个bind()，好像是命名空间问题，返回int的bind()需要写成::bind()，在server的main()里
+  - server的main()里用了一个goto
 
 - 目录
 

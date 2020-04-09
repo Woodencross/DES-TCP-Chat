@@ -12,7 +12,7 @@ https://github.com/Woodencross/DES-TCP-Chat.git
   
     ```c++
     bitset<4> a("1000");//a[0]=0, a[1]=0, a[2]=0, a[3]=1
-  ```
+    ```
   
     所以给bitset类型循环赋值的时候都是下标从大到小进行遍历
   

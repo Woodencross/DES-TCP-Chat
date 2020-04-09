@@ -8,7 +8,7 @@ https://github.com/Woodencross/DES-TCP-Chat.git
 
 - Tips：
   
-  - ==重要==：bitset类型访问时低位在字符串的高位，高位在字符串的低位，如：
+  - **重要**：bitset类型访问时低位在字符串的高位，高位在字符串的低位，如：
   
     ```c++
     bitset<4> a("1000");//a[0]=0, a[1]=0, a[2]=0, a[3]=1

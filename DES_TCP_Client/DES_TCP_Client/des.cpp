@@ -1,8 +1,8 @@
 #include"des.h"
 
-bitset<64> key;
+bitset<64> key;/*= str2bit("your key here")*/
 bitset<48> subKey[16];
-//³õÊ¼ÖÃ»»IP
+//åˆå§‹ç½®æ¢IP
 int IP[] = {
 	58, 50, 42, 34, 26, 18, 10, 2,
 	60, 52, 44, 36, 28, 20, 12, 4,
@@ -14,7 +14,7 @@ int IP[] = {
 	63, 55, 47, 39, 31, 23, 15, 7
 };
 
-//Äæ³õÊ¼ÖÃ»»IP-1
+//é€†åˆå§‹ç½®æ¢IP-1
 int IP_1[] = {
 	40, 8, 48, 16, 56, 24, 64, 32,
 	39, 7, 47, 15, 55, 23, 63, 31,
@@ -26,7 +26,7 @@ int IP_1[] = {
 	33, 1, 41,  9, 49, 17, 57, 25
 };
 
-//ÖÃ»»Ñ¡ÔñPC-1
+//ç½®æ¢é€‰æ‹©PC-1
 int PC_1[] = {
 	57, 49, 41, 33, 25, 17,  9,
 	1, 58, 50, 42, 34, 26, 18,
@@ -38,7 +38,7 @@ int PC_1[] = {
 	21, 13,  5, 28, 20, 12,  4
 };
 
-//ÖÃ»»Ñ¡ÔñPC-2
+//ç½®æ¢é€‰æ‹©PC-2
 int PC_2[] = {
 	14, 17, 11, 24,  1,  5,  3, 28,
 	15,  6, 21, 10, 23, 19, 12,  4,
@@ -48,10 +48,10 @@ int PC_2[] = {
 	34, 53, 46, 42, 50, 36, 29, 32
 };
 
-//×óÒÆ±í
+//å·¦ç§»è¡¨
 int shift[] = { 1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1 };
 
-//À©Õ¹ÖÃ»»EºĞ
+//æ‰©å±•ç½®æ¢Eç›’
 int E[] = {
 	32,  1,  2,  3,  4,  5,
 	4,  5,  6,  7,  8,  9,
@@ -63,7 +63,7 @@ int E[] = {
 	28, 29, 30, 31, 32,  1
 };
 
-//SºĞ
+//Sç›’
 bitset<4> S[][64] = {
 	{
 		0xe,0x0,0x4,0xf,0xd,0x7,0x1,0x4,
@@ -147,7 +147,7 @@ bitset<4> S[][64] = {
 	}
 };
 
-//PºĞ
+//Pç›’
 int P[] = {
 	16,  7, 20, 21,
 	29, 12, 28, 17,
@@ -159,7 +159,7 @@ int P[] = {
 	22, 11,  4, 25
 };
 
-//×óÒÆº¯Êı
+//å·¦ç§»å‡½æ•°
 bitset<28> ls(bitset<28> k, int shift) {
 	bitset<28> temp;
 	/*for (int i = 0; i < shift; i++) {
@@ -173,18 +173,18 @@ bitset<28> ls(bitset<28> k, int shift) {
 	return temp;
 }
 
-//fº¯Êı
+//få‡½æ•°
 bitset<32> f(bitset<32> R, bitset<48> k) {
-	//EºĞÀ©Õ¹
+	//Eç›’æ‰©å±•
 	bitset<48> expandR;
 	for (int i = 0; i < 48; i++) {
 		expandR[47 - i] = R[32 - E[i]];
 	}
 
-	//Óë×ÓÃÜÔ¿Òì»ò
+	//ä¸å­å¯†é’¥å¼‚æˆ–
 	expandR ^= k;
 
-	//SºĞÔËËã
+	//Sç›’è¿ç®—
 	bitset<32> out = 0x0;
 	bitset<6> s_in[8];
 	int x = 47;
@@ -202,7 +202,7 @@ bitset<32> f(bitset<32> R, bitset<48> k) {
 		}
 	}
 
-	//PÖÃ»»
+	//Pç½®æ¢
 	bitset<32> temp = out;
 	for (int i = 0; i < 32; i++) {
 		out[31 - i] = temp[32 - P[i]];
@@ -210,14 +210,14 @@ bitset<32> f(bitset<32> R, bitset<48> k) {
 	return out;
 }
 
-//×ÓÃÜÔ¿Éú³Éº¯Êı
+//å­å¯†é’¥ç”Ÿæˆå‡½æ•°
 void genKeys() {
-	bitset<56> theKey;//PC-1Ö®ºóµÄkey
+	bitset<56> theKey;//PC-1ä¹‹åçš„key
 	bitset<28> left;
 	bitset<28> right;
-	bitset<48> outKey;//PC-2Ö®ºóµÄkey
+	bitset<48> outKey;//PC-2ä¹‹åçš„key
 
-	//PC-1ÖÃ»»
+	//PC-1ç½®æ¢
 	for (int i = 0; i < 56; i++) {
 		theKey[55 - i] = key[64 - PC_1[i]];
 	}
@@ -252,7 +252,7 @@ bitset<64> encrypt(bitset<64> plain)
 	bitset<32> right;
 	bitset<32> newLeft;
 
-	//IPÖÃ»»
+	//IPç½®æ¢
 	for (int i = 0; i < 64; i++) {
 		thePlain[63 - i] = plain[64 - IP[i]];
 	}
@@ -263,7 +263,7 @@ bitset<64> encrypt(bitset<64> plain)
 	}
 	//cout << "IP:" << thePlain << endl;
 
-	//16ÂÖµü´ú
+	//16è½®è¿­ä»£
 	for (int round = 0; round < 16; round++) {
 		newLeft = right;
 		right = left^f(right, subKey[round]);
@@ -271,14 +271,14 @@ bitset<64> encrypt(bitset<64> plain)
 		//cout << "L" << round + 1 << ":" << left << endl << "R" << round + 1 << ":" << right << endl;
 	}
 
-	//ºÏ³ÉR16L16
+	//åˆæˆR16L16
 	for (int i = 0; i < 32; i++) {
 		cypher[63 - i] = right[31 - i];
 		cypher[31 - i] = left[31 - i];
 	}
 	//cout << "cypher:" << cypher << endl;
 
-	//IP-1ÖÃ»»
+	//IP-1ç½®æ¢
 	bitset<64> temp = cypher;
 	for (int i = 0; i < 64; i++) {
 		cypher[63 - i] = temp[64 - IP_1[i]];
@@ -328,7 +328,7 @@ string bit2str(bitset<64> bits)
 {
 	string str;
 	int val = 0;
-	if (bits.any() == false) {//È«0
+	if (bits.any() == false) {//å…¨0
 		//str = '\0';
 	}
 	else {
@@ -349,14 +349,14 @@ string bit2str(bitset<64> bits)
 bitset<64> str2bit(string str)
 {
 	bitset<64> bits;
-	if (str.length() == 8) {//×Ö·û´®Õû8¸ö£¬64bit
+	if (str.length() == 8) {//å­—ç¬¦ä¸²æ•´8ä¸ªï¼Œ64bit
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				bits[63 - 8 * i - j] = (str[i] >> (7 - j)) & 1;
 			}
 		}
 	}
-	else {//²¹0
+	else {//è¡¥0
 		int len = str.length() % 8;
 		for (int i = 0; i < len; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -373,8 +373,8 @@ bitset<64> str2bit(string str)
 
 string encrypt(string plain)
 {
-	int seg = plain.length() / 8;//¼¸¸ö64bit¶Î
-	int len = plain.length() % 8;//»¹Ê£¶àÉÙ
+	int seg = plain.length() / 8;//å‡ ä¸ª64bitæ®µ
+	int len = plain.length() % 8;//è¿˜å‰©å¤šå°‘
 	string result;
 	for (int i = 0; i < seg; i++) {
 		string tempstr = plain.substr(i * 8, 8);
@@ -389,7 +389,7 @@ string encrypt(string plain)
 
 string decrypt(string cypher)
 {
-	int seg = cypher.length() / 64;//¼¸¸ö64bit¶Î,±Ø¶¨Õû³ı
+	int seg = cypher.length() / 64;//å‡ ä¸ª64bitæ®µ,å¿…å®šæ•´é™¤
 	string result;
 	for (int i = 0; i < seg; i++) {
 		string s = cypher.substr(i * 64, 64);
